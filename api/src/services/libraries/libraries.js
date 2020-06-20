@@ -1,5 +1,5 @@
 import { db } from 'src/lib/db'
-import { requireAuth } from 'src/lib/auth'
+import { requireAuth, requireAdmin } from 'src/lib/auth'
 
 export const libraries = () => {
   requireAuth()
@@ -14,14 +14,14 @@ export const library = ({ id }) => {
 }
 
 export const createLibrary = ({ input }) => {
-  requireAuth()
+  requireAdmin()
   return db.library.create({
     data: input,
   })
 }
 
 export const updateLibrary = ({ id, input }) => {
-  requireAuth()
+  requireAdmin()
   return db.library.update({
     data: input,
     where: { id },
@@ -29,7 +29,7 @@ export const updateLibrary = ({ id, input }) => {
 }
 
 export const deleteLibrary = ({ id }) => {
-  requireAuth()
+  requireAdmin()
   return db.library.delete({
     where: { id },
   })
